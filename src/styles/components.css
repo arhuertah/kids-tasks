@@ -1,0 +1,92 @@
+@layer components {
+  /* Card Styles */
+  .card-wrapper {
+    position: relative;
+    width: 7rem;
+    transition-property: all;
+    transition-duration: 300ms;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+  
+  .card-wrapper:hover {
+    --tw-translate-y: -0.25rem;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .card-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    transition-property: all;
+    transition-duration: 300ms;
+    --tw-blur: blur(8px);
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  }
+
+  .card-glow-selected {
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    --tw-gradient-from: #a78bfa;
+    --tw-gradient-via: #f472b6;
+    --tw-gradient-to: #fb923c;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to);
+    opacity: 0.7;
+  }
+
+  .card-glow-default {
+    background-image: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
+    --tw-gradient-from: #d1d5db;
+    --tw-gradient-to: #9ca3af;
+    opacity: 0.4;
+  }
+
+  .card-wrapper:hover .card-glow-default {
+    opacity: 0.6;
+  }
+
+  /* Table Styles */
+  .table-base {
+    min-width: 100%;
+    border-collapse: collapse;
+    background-color: rgb(255 255 255 / 0.3);
+    backdrop-filter: blur(4px);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .table-header {
+    padding: 0.75rem;
+    border-right-width: 1px;
+    border-right-color: #9ca3af;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .table-cell {
+    padding: 0.75rem;
+    border-right-width: 1px;
+    border-right-color: #9ca3af;
+  }
+
+  /* Animation Classes */
+  .star-pop {
+    animation: pop 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Input Styles */
+  .input-base {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    border-width: 1px;
+  }
+  
+  .input-base:focus {
+    outline: none;
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    --tw-ring-color: rgb(216 180 254 / 0.5);
+  }
+}
