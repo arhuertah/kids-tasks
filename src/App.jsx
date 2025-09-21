@@ -109,31 +109,63 @@ function App() {
     };
 
     const handleSubmitKid = (kidData) => {
-        console.log('Submitting kid:', kidData);
-        if (!kidFormData) {
-            // Add mode
-            if (kids.length >= 5) return; // Maximum 5 kids
-            const newKid = {
-                ...kidData,
-                tasks: [],
-                badges: 0,
-                goals: []
-            };
-            console.log('Adding new kid:', newKid);
-            setKids([...kids, newKid]);
-            setSelectedKid(newKid);
-        } else {
-            // Edit mode
-            const updatedKids = kids.map(kid => 
-                kid.id === kidFormData.id 
-                    ? { ...kid, name: kidData.name, emoji: kidData.emoji }
-                    : kid
-            );
-            setKids(updatedKids);
-            if (selectedKid && selectedKid.id === kidFormData.id) {
-                setSelectedKid({ ...selectedKid, name: kidData.name, emoji: kidData.emoji });
+        console.log('handleSubmitKid called with:', { kidData, kidFormData, currentKids: kids });
+        
+        try {
+            if (!kidFormData || !kidFormData.id) {
+                // Add mode
+                if (kids.length >= 5) {
+                    console.log('Maximum kids reached, not adding');
+                    return;
+                }
+                
+                const newKid = {
+                    id: Date.now().toString(),
+                    name: kidData.name,
+                    emoji: kidData.emoji,
+                    tasks: [],
+                    badges: 0,
+                    goals: []
+                };
+                
+                console.log('Created new kid object:', newKid);
+                
+                // Update state using callback to ensure we have latest state
+                setKids(currentKids => {
+                    console.log('Current kids before update:', currentKids);
+                    const updatedKids = [...currentKids, newKid];
+                    console.log('Updated kids array:', updatedKids);
+                    return updatedKids;
+                });
+                
+                // Update selected kid
+                setSelectedKid(newKid);
+                console.log('Selected new kid:', newKid);
+            } else {
+                // Edit mode
+                console.log('Editing existing kid:', kidFormData);
+                setKids(currentKids => {
+                    const updatedKids = currentKids.map(kid => 
+                        kid.id === kidFormData.id 
+                            ? { ...kid, name: kidData.name, emoji: kidData.emoji }
+                            : kid
+                    );
+                    console.log('Updated kids after edit:', updatedKids);
+                    return updatedKids;
+                });
+                
+                if (selectedKid && selectedKid.id === kidFormData.id) {
+                    setSelectedKid(current => ({
+                        ...current,
+                        name: kidData.name,
+                        emoji: kidData.emoji
+                    }));
+                }
             }
+        } catch (error) {
+            console.error('Error in handleSubmitKid:', error);
         }
+        
         // Close the form
         setKidFormData(null);
     };
