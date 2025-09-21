@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Sparkle</title>
+    <g stroke="none" fill="none">
+        <path d="M16,0 L19.2,12.8 L32,16 L19.2,19.2 L16,32 L12.8,19.2 L0,16 L12.8,12.8 L16,0 Z" fill="#FFD700"/>
+        <path d="M16,7 L17.6,13.9 L24.5,16 L17.6,18.1 L16,25 L14.4,18.1 L7.5,16 L14.4,13.9 L16,7 Z" fill="#FFF4B0"/>
+    </g>
+</svg>
