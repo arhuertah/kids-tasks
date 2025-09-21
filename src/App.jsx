@@ -9,6 +9,7 @@ import AddGoalForm from "./components/AddGoalForm";
 import KidForm from "./components/KidForm";
 import Starfield from "./components/Starfield";
 import ThemeSelector, { themes } from "./components/ThemeSelector";
+import Footer from "./components/Footer";
 
 function App() {
     const [kids, setKids] = useState(() => {
@@ -171,7 +172,8 @@ function App() {
     };
 
     return (
-        <div className={`relative min-h-screen text-gray-800 p-6 ${themes.find(t => t.id === currentTheme)?.class}`}>
+        <div className={`relative min-h-screen text-gray-800 ${themes.find(t => t.id === currentTheme)?.class}`}>
+            <div className="flex flex-col min-h-screen p-6">
             <ThemeSelector currentTheme={currentTheme} onThemeChange={setCurrentTheme} />
             <h1 className="text-5xl font-bold text-center mb-8 font-baloo tracking-wider bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-transparent bg-clip-text">✨ Kids Tasks ✨</h1>
             <KidSelector 
@@ -206,6 +208,8 @@ function App() {
                     </p>
                 </div>
             )}
+                <Footer />
+            </div>
         </div>
     );
 }
