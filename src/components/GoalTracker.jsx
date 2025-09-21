@@ -1,10 +1,43 @@
 import confetti from "canvas-confetti";
+import { useEffect, useRef } from "react";
 
 export default function GoalTracker({ goals, badges, onGoalAchieved }) {
-    const handleCelebrate = (goal) => {
-        confetti();
-        onGoalAchieved(goal.id);
+    const celebratedGoalsRef = useRef(new Set());
+
+    const triggerCelebration = () => {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
     };
+
+    const handleCelebrate = (goal) => {
+        triggerCelebration();
+        onGoalAchieved(goal.id);
+        celebratedGoalsRef.current.add(goal.id);
+    };
+    
+    // Reset celebration state when badges decrease below requirement
+    useEffect(() => {
+        goals.forEach(goal => {
+            if (badges < goal.requiredBadges && celebratedGoalsRef.current.has(goal.id)) {
+                celebratedGoalsRef.current.delete(goal.id);
+            }
+        });
+    }, [badges, goals]);
+
+    useEffect(() => {
+        goals.forEach(goal => {
+            const isAchievable = badges >= goal.requiredBadges;
+            const notYetAchieved = !goal.achieved;
+            const notYetCelebrated = !celebratedGoalsRef.current.has(goal.id);
+            
+            if (isAchievable && notYetAchieved && notYetCelebrated) {
+                handleCelebrate(goal);
+            }
+        });
+    }, [badges, goals]);
 
     return (
         <div>
@@ -26,17 +59,15 @@ export default function GoalTracker({ goals, badges, onGoalAchieved }) {
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-3 mt-2">
                             <div
-                                className={`h-3 rounded-full ${achieved ? "bg-green-500" : "bg-blue-400"}`}
+                                className={`h-3 rounded-full transition-all duration-1000 ${achieved ? "bg-green-500" : "bg-blue-400"}`}
                                 style={{ width: `${progress}%` }}
                             ></div>
                         </div>
-                        {achieved && !goal.achieved && (
-                            <button
-                                onClick={() => handleCelebrate(goal)}
-                                className="mt-2 px-3 py-1 bg-pink-500 text-white rounded-lg font-bold"
-                            >
-                                Celebrate 🎉
-                            </button>
+                        {achieved && (
+                            <div className="mt-2 text-green-500 text-sm font-medium flex items-center gap-1">
+                                <span>Goal achieved!</span> 
+                                <span className="animate-bounce">🎉</span>
+                            </div>
                         )}
                     </div>
                 );

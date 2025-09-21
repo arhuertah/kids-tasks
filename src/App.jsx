@@ -70,10 +70,21 @@ function App() {
                           }
                         : task
                 );
+                
+                // Calculate new badge count
+                const newBadgeCount = kid.badges + (isCompleted ? -1 : 1);
+                
+                // Update goals based on new badge count
+                const updatedGoals = kid.goals.map(goal => ({
+                    ...goal,
+                    achieved: newBadgeCount >= goal.requiredBadges && goal.achieved
+                }));
+                
                 return { 
                     ...kid, 
                     tasks: updatedTasks, 
-                    badges: kid.badges + (isCompleted ? -1 : 1)
+                    badges: newBadgeCount,
+                    goals: updatedGoals
                 };
             }
             return kid;
