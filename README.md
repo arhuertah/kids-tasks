@@ -1,6 +1,6 @@
 # ⭐ Family Task Board
 
-A delightful and interactive task management app designed for families with kids. Track daily tasks, earn badges, and achieve goals in a fun, engaging way!
+A delightful and interactive task management app designed for families with kids. Track daily tasks, earn badges, and achieve goals in a fun, engaging way! This project showcases the power of AI-assisted development, crafted through an innovative collaboration between human creativity and artificial intelligence.
 
 ![Family Task Board Preview]
 <img width="2070" height="1711" alt="image" src="https://github.com/user-attachments/assets/ec4c214e-eb12-4824-a90a-5d0e29ba177f" />
@@ -44,6 +44,23 @@ npm run dev
 4. Open your browser and navigate to `http://localhost:5173`
 
 ## 💻 Development
+
+### 🤖 AI-Powered Development Process
+
+This project represents an exciting experiment in AI-assisted development, showcasing how modern AI tools can enhance the software development workflow. The development process was a collaborative effort between human creativity and multiple AI assistants:
+
+- **GitHub Copilot**: Provided intelligent code suggestions and helped with implementation details
+- **Microsoft Copilot**: Assisted with project structure and best practices
+- **Claude Sonnet 3.5**: Helped refine features and improve user experience
+
+The development followed an iterative process where ideas were proposed, implemented, and refined through continuous dialogue between human developer and AI assistants. This approach led to:
+
+- Rapid prototyping and implementation
+- Creative problem-solving through AI suggestions
+- Enhanced code quality through AI-assisted reviews
+- Innovative feature implementations
+
+This experimental approach demonstrates the potential of AI-assisted development while maintaining human creativity and decision-making at its core.
 
 ### Available Scripts
 
