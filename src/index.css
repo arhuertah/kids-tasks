@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Outfit:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap');
 @import './styles/components.css';
 
 @tailwind base;
@@ -5,7 +6,7 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Comic Neue', cursive, sans-serif;
+  font-family: theme('fontFamily.quicksand');
 }
 
 @keyframes twinkle {

@@ -173,7 +173,7 @@ function App() {
     return (
         <div className={`relative min-h-screen text-gray-800 p-6 ${themes.find(t => t.id === currentTheme)?.class}`}>
             <ThemeSelector currentTheme={currentTheme} onThemeChange={setCurrentTheme} />
-            <h1 className="text-3xl font-bold text-center mb-6">⭐ Family Task Board ⭐</h1>
+            <h1 className="text-5xl font-bold text-center mb-8 font-baloo tracking-wider bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-transparent bg-clip-text">✨ Kids Tasks ✨</h1>
             <KidSelector 
                 kids={kids} 
                 onSelect={setSelectedKid} 

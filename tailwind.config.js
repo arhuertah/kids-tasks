@@ -2,6 +2,13 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        quicksand: ['Quicksand', 'sans-serif'],
+        baloo: ['Baloo 2', 'cursive'],
+        nunito: ['Nunito', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif'],
+        dmsans: ['DM Sans', 'sans-serif'],
+      },
       animation: {
         'star-pop': 'pop 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
       },
