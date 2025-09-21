@@ -2,7 +2,8 @@
 
 A delightful and interactive task management app designed for families with kids. Track daily tasks, earn badges, and achieve goals in a fun, engaging way!
 
-![Family Task Board Preview](preview.png)
+![Family Task Board Preview]
+<img width="2070" height="1711" alt="image" src="https://github.com/user-attachments/assets/ec4c214e-eb12-4824-a90a-5d0e29ba177f" />
 
 ## ✨ Features
 
