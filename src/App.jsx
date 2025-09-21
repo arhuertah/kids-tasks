@@ -10,6 +10,7 @@ import KidForm from "./components/KidForm";
 import Starfield from "./components/Starfield";
 import ThemeSelector, { themes } from "./components/ThemeSelector";
 import Footer from "./components/Footer";
+import ConfirmDialog from "./components/ConfirmDialog";
 
 function App() {
     const [kids, setKids] = useState(() => {
@@ -27,6 +28,10 @@ function App() {
         return localStorage.getItem('theme') || 'cotton-candy';
     });
     const [kidFormData, setKidFormData] = useState(null);
+    const [confirmDialog, setConfirmDialog] = useState({
+        isOpen: false,
+        kidToRemove: null
+    });
 
     useEffect(() => {
         localStorage.setItem('theme', currentTheme);
@@ -171,6 +176,23 @@ function App() {
         setKidFormData(null);
     };
 
+    const handleRemoveKid = (kid) => {
+        setConfirmDialog({
+            isOpen: true,
+            kidToRemove: kid
+        });
+    };
+
+    const confirmRemoveKid = () => {
+        const updatedKids = kids.filter(k => k.id !== confirmDialog.kidToRemove.id);
+        setKids(updatedKids);
+        
+        // If we're removing the selected kid, select another one if available
+        if (selectedKid?.id === confirmDialog.kidToRemove.id) {
+            setSelectedKid(updatedKids[0] || null);
+        }
+    };
+
     return (
         <div className={`relative min-h-screen text-gray-800 ${themes.find(t => t.id === currentTheme)?.class}`}>
             <div className="flex flex-col min-h-screen p-6">
@@ -182,7 +204,15 @@ function App() {
                 selectedKid={selectedKid} 
                 onAddKid={() => setKidFormData({})} 
                 onEditKid={(kid) => setKidFormData(kid)}
+                onRemoveKid={handleRemoveKid}
                 maxKidsReached={kids.length >= 5} 
+            />
+            <ConfirmDialog
+                isOpen={confirmDialog.isOpen}
+                onClose={() => setConfirmDialog({ isOpen: false, kidToRemove: null })}
+                onConfirm={confirmRemoveKid}
+                title="Remove Kid"
+                message={`Are you sure you want to remove ${confirmDialog.kidToRemove?.name}? This action cannot be undone.`}
             />
             {kidFormData !== null && (
                 <KidForm 

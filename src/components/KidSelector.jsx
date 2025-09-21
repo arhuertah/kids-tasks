@@ -1,6 +1,6 @@
 import { Card } from './ui/Card';
 
-export default function KidSelector({ kids, onSelect, selectedKid, onAddKid, onEditKid, maxKidsReached }) {
+export default function KidSelector({ kids, onSelect, selectedKid, onAddKid, onEditKid, onRemoveKid, maxKidsReached }) {
   return (
     <div className="flex justify-center gap-6 mb-8 flex-wrap">
       {kids.map((kid) => (
@@ -22,17 +22,32 @@ export default function KidSelector({ kids, onSelect, selectedKid, onAddKid, onE
               </span>
             </Card>
           </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onEditKid(kid);
-            }}
-            className="absolute -top-2 -right-2 bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center
-              opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-purple-600"
-            title="Edit Kid"
-          >
-            ✏️
-          </button>
+          <div className="absolute -top-2 -right-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onEditKid(kid);
+              }}
+              className="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center
+                opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-purple-600"
+              title="Edit Kid"
+            >
+              ✏️
+            </button>
+          </div>
+          <div className="absolute -bottom-1 right-0">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemoveKid(kid);
+              }}
+              className="bg-red-400 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs
+                opacity-0 group-hover:opacity-75 transition-opacity duration-200 hover:opacity-100 hover:bg-red-500"
+              title="Remove Kid"
+            >
+              ×
+            </button>
+          </div>
         </div>
       ))}
       
