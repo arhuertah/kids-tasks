@@ -13,6 +13,8 @@ import Footer from "./components/Footer";
 import ConfirmDialog from "./components/ConfirmDialog";
 
 function App() {
+    // State for task removal confirmation dialog
+    const [taskToRemove, setTaskToRemove] = useState(null);
     const [kids, setKids] = useState(() => {
         const savedKids = localStorage.getItem('kids');
         return savedKids ? JSON.parse(savedKids) : initialKids;
@@ -204,6 +206,29 @@ function App() {
         }
     };
 
+    // Handler to remove a task from the selected kid
+    // Show confirmation dialog for task removal
+    const handleRequestRemoveTask = (task) => {
+        setTaskToRemove(task);
+    };
+
+    // Remove the task after confirmation
+    const confirmRemoveTask = () => {
+        if (!taskToRemove) return;
+        const updatedKids = kids.map(kid => {
+            if (kid.id === selectedKid.id) {
+                return {
+                    ...kid,
+                    tasks: kid.tasks.filter(t => t.id !== taskToRemove.id)
+                };
+            }
+            return kid;
+        });
+        setKids(updatedKids);
+        setSelectedKid(updatedKids.find(k => k.id === selectedKid.id));
+        setTaskToRemove(null);
+    };
+
     return (
         <div className={`relative min-h-screen text-gray-800 ${themes.find(t => t.id === currentTheme)?.class}`}>
             <div className="flex flex-col min-h-screen p-6">
@@ -236,7 +261,18 @@ function App() {
                 <>
                     <BadgeCounter badges={selectedKid.badges} />
                     <AddTaskForm onAddTask={handleAddTask} />
-                    <WeeklyDashboard kid={selectedKid} onTaskComplete={handleTaskComplete} />
+                    <WeeklyDashboard
+                        kid={selectedKid}
+                        onTaskComplete={handleTaskComplete}
+                        onRequestRemoveTask={handleRequestRemoveTask}
+                    />
+            <ConfirmDialog
+                isOpen={!!taskToRemove}
+                onClose={() => setTaskToRemove(null)}
+                onConfirm={confirmRemoveTask}
+                title="Remove Task"
+                message={taskToRemove ? `Are you sure you want to remove the task "${taskToRemove.title}"? This action cannot be undone.` : ""}
+            />
                     <AddGoalForm onAddGoal={handleAddGoal} />
                     <GoalTracker goals={selectedKid.goals} badges={selectedKid.badges} onGoalAchieved={handleGoalAchieved} />
                 </>
